@@ -1,0 +1,94 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.ems:employee-management-system >-----------------
+[INFO] Building Employee Management System 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.2:run (default-cli) > test-compile @ employee-management-system >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ employee-management-system ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ employee-management-system ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ employee-management-system ---
+[INFO] skip non existing resourceDirectory D:\EmployeeManagementSystem\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ employee-management-system ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.2:run (default-cli) < test-compile @ employee-management-system <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.2:run (default-cli) @ employee-management-system ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.2)
+
+2026-02-17 12:32:25 - Starting EmployeeManagementSystemApplication using Java 21.0.7 with PID 26300 (D:\EmployeeManagementSystem\backend\target\classes started by Asus in D:\EmployeeManagementSystem\backend)
+2026-02-17 12:32:25 - Running with Spring Boot v3.2.2, Spring v6.1.3
+2026-02-17 12:32:25 - No active profile set, falling back to 1 default profile: "default"
+2026-02-17 12:32:26 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-17 12:32:26 - Finished Spring Data repository scanning in 99 ms. Found 5 JPA repository interfaces.
+2026-02-17 12:32:27 - Tomcat initialized with port 8080 (http)
+2026-02-17 12:32:27 - Starting service [Tomcat]
+2026-02-17 12:32:27 - Starting Servlet engine: [Apache Tomcat/10.1.18]
+2026-02-17 12:32:27 - Initializing Spring embedded WebApplicationContext
+2026-02-17 12:32:27 - Root WebApplicationContext: initialization completed in 1597 ms
+2026-02-17 12:32:27 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-17 12:32:27 - HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-02-17 12:32:27 - HHH000026: Second-level cache disabled
+2026-02-17 12:32:27 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-17 12:32:27 - HikariPool-1 - Starting...
+2026-02-17 12:32:27 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@521ba38f
+2026-02-17 12:32:27 - HikariPool-1 - Start completed.
+2026-02-17 12:32:27 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-17 12:32:28 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-17 12:32:28 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-17 12:32:29 - Filter 'jwtAuthenticationFilter' configured for use
+2026-02-17 12:32:29 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-17 12:32:30 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-17 12:32:30 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@29af0d3b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15682e7f, org.springframework.security.web.context.SecurityContextHolderFilter@756d28cb, org.springframework.security.web.header.HeaderWriterFilter@2f0fa056, org.springframework.web.filter.CorsFilter@74e3836a, org.springframework.security.web.authentication.logout.LogoutFilter@76700647, com.ems.security.JwtAuthenticationFilter@956cf3d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b79305c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1f7410c5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@20df25f8, org.springframework.security.web.session.SessionManagementFilter@5b74c45a, org.springframework.security.web.access.ExceptionTranslationFilter@318a2e9f, org.springframework.security.web.access.intercept.AuthorizationFilter@6c81bd6d]
+2026-02-17 12:32:30 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-02-17 12:32:30 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-17 12:32:30 - HikariPool-1 - Shutdown initiated...
+2026-02-17 12:32:30 - HikariPool-1 - Shutdown completed.
+2026-02-17 12:32:30 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-02-17 12:32:30 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.384 s
+[INFO] Finished at: 2026-02-17T12:32:30+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.2:run (default-cli) on project employee-management-system: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
