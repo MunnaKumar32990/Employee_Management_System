@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AuthProvider } from './context/AuthContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -31,36 +32,38 @@ const theme = createTheme({
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <AuthProvider>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/setup" element={<Setup />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route
-                            path="/app"
-                            element={
-                                <ProtectedRoute>
-                                    <Layout />
-                                </ProtectedRoute>
-                            }
-                        >
-                            <Route index element={<Navigate to="/app/dashboard" replace />} />
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="employees" element={<EmployeeList />} />
-                            <Route path="employees/new" element={<EmployeeForm />} />
-                            <Route path="employees/edit/:id" element={<EmployeeForm />} />
-                            <Route path="departments" element={<DepartmentList />} />
-                            <Route path="attendance" element={<AttendanceManagement />} />
-                            <Route path="payroll" element={<PayrollManagement />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-                <ToastContainer position="top-right" autoClose={3000} />
-            </AuthProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <AuthProvider>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/setup" element={<Setup />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route
+                                path="/app"
+                                element={
+                                    <ProtectedRoute>
+                                        <Layout />
+                                    </ProtectedRoute>
+                                }
+                            >
+                                <Route index element={<Navigate to="/app/dashboard" replace />} />
+                                <Route path="dashboard" element={<Dashboard />} />
+                                <Route path="employees" element={<EmployeeList />} />
+                                <Route path="employees/new" element={<EmployeeForm />} />
+                                <Route path="employees/edit/:id" element={<EmployeeForm />} />
+                                <Route path="departments" element={<DepartmentList />} />
+                                <Route path="attendance" element={<AttendanceManagement />} />
+                                <Route path="payroll" element={<PayrollManagement />} />
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
+                    <ToastContainer position="top-right" autoClose={3000} />
+                </AuthProvider>
+            </ThemeProvider>
+        </ErrorBoundary>
     );
 }
 
