@@ -6,6 +6,7 @@ import com.ems.entity.Employee;
 import com.ems.exception.ResourceNotFoundException;
 import com.ems.repository.DepartmentRepository;
 import com.ems.repository.EmployeeRepository;
+import com.ems.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
+    private final NotificationService notificationService;
+    private final UserRepository userRepository;
 
     @Transactional
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
@@ -67,6 +70,10 @@ public class EmployeeService {
             throw new IllegalArgumentException("Employee with email '" + employeeDTO.getEmail() + "' already exists");
         }
 
+        // Check if status changed
+        boolean statusChanged = !employee.getStatus().name().equals(employeeDTO.getStatus());
+        String oldStatus = employee.getStatus().name();
+
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
         employee.setEmail(employeeDTO.getEmail());
@@ -84,6 +91,23 @@ public class EmployeeService {
         }
 
         Employee updatedEmployee = employeeRepository.save(employee);
+
+        // Send notification if status changed
+        if (statusChanged) {
+            userRepository.findByEmail(employee.getEmail()).ifPresent(user -> {
+                String message = String.format("Your employment status has been changed from %s to %s", 
+                    oldStatus, employeeDTO.getStatus());
+                notificationService.createNotification(
+                    user.getId(),
+                    "Status Update",
+                    message,
+                    com.ems.entity.Notification.NotificationType.STATUS_CHANGE,
+                    employee.getId(),
+                    "Employee"
+                );
+            });
+        }
+
         return convertToDTO(updatedEmployee);
     }
 

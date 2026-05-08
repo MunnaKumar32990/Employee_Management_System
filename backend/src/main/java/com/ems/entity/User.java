@@ -42,7 +42,7 @@ public class User implements UserDetails {
     private boolean enabled = true;
 
     public enum Role {
-        ROLE_ADMIN, ROLE_HR
+        ROLE_ADMIN, ROLE_HR, ROLE_EMPLOYEE
     }
 
     @Override

@@ -61,7 +61,7 @@ const Home = () => {
                                 fontSize: '1.1rem'
                             }}
                         >
-                            Sign In
+                            Admin Sign In
                         </Button>
                         <Button
                             variant="outlined"
@@ -78,6 +78,39 @@ const Home = () => {
                             }}
                         >
                             First Time Setup
+                        </Button>
+                    </Box>
+
+                    <Box display="flex" justifyContent="center" gap={2} sx={{ mb: 6 }}>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            onClick={() => navigate('/employee/login')}
+                            sx={{
+                                bgcolor: '#2e7d32',
+                                color: 'white',
+                                '&:hover': { bgcolor: '#1b5e20' },
+                                px: 4,
+                                py: 1.5,
+                                fontSize: '1.1rem'
+                            }}
+                        >
+                            Employee Login
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            onClick={() => navigate('/employee/signup')}
+                            sx={{
+                                borderColor: 'white',
+                                color: 'white',
+                                '&:hover': { borderColor: '#f5f5f5', bgcolor: 'rgba(255,255,255,0.1)' },
+                                px: 4,
+                                py: 1.5,
+                                fontSize: '1.1rem'
+                            }}
+                        >
+                            Employee Signup
                         </Button>
                     </Box>
 

@@ -66,7 +66,7 @@ public class AuthService {
         try {
             user.setRole(User.Role.valueOf(request.getRole()));
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid role. Must be ROLE_ADMIN or ROLE_HR");
+            throw new IllegalArgumentException("Invalid role. Must be ROLE_ADMIN, ROLE_HR, or ROLE_EMPLOYEE");
         }
 
         user.setEnabled(true);
@@ -108,7 +108,7 @@ public class AuthService {
         // Check for account lockout
         long failedAttempts = auditLogService.countFailedLoginAttempts(
             username,
-            LocalDateTime.now().minusMillis(accountLockDuration)
+            LocalDateTime.now().minusSeconds(accountLockDuration / 1000)
         );
 
         if (failedAttempts >= maxLoginAttempts) {

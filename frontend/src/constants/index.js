@@ -75,6 +75,7 @@ export const ATTENDANCE_STATUS = {
 export const USER_ROLES = {
     ADMIN: 'ROLE_ADMIN',
     HR: 'ROLE_HR',
+    EMPLOYEE: 'ROLE_EMPLOYEE',
 };
 
 // Validation

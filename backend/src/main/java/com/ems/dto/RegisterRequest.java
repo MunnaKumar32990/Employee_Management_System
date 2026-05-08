@@ -26,5 +26,5 @@ public class RegisterRequest {
     private String email;
 
     @NotBlank(message = "Role is required")
-    private String role; // ADMIN or HR
+    private String role; // ADMIN, HR, or EMPLOYEE
 }

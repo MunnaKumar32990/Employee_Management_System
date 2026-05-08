@@ -49,7 +49,8 @@ A **production-ready, enterprise-grade** full-stack web application for managing
 - ✅ **Input Sanitization** - XSS and SQL injection prevention
 - ✅ **Secure Token Storage** - Access tokens in memory (XSS protection)
 - ✅ **CORS Configuration** - Environment-based origin control
-- ✅ **Role-Based Access Control** - ADMIN and HR roles
+- ✅ **Role-Based Access Control** - ADMIN, HR, and EMPLOYEE roles
+- ✅ **Self-Service Employee Portal** - Employees can self-register and access their data
 
 ### 📊 Audit & Monitoring
 - ✅ **Comprehensive Audit Logging** - Track all system activities
@@ -58,6 +59,15 @@ A **production-ready, enterprise-grade** full-stack web application for managing
 - ✅ **Request/Response Logging** - Performance tracking
 - ✅ **Async Logging** - Non-blocking audit trail
 - ✅ **Activity Timeline** - Complete user action history
+
+### 🔔 Notification System
+- ✅ **Real-Time Notifications** - Instant updates for employees
+- ✅ **Status Change Alerts** - Notify employees when status changes
+- ✅ **Payroll Notifications** - Alert when payroll is generated
+- ✅ **Attendance Notifications** - Confirm attendance marking
+- ✅ **Unread Badge Counter** - Visual indicator for new notifications
+- ✅ **Mark as Read** - Individual and bulk read operations
+- ✅ **Notification History** - Complete notification timeline
 
 ### 👥 Employee Management
 - ✅ **CRUD Operations** - Create, read, update, delete employees
@@ -248,8 +258,14 @@ npm run dev
 - Swagger UI: http://localhost:8081/swagger-ui.html
 
 ### Default Login Credentials
+
+**Admin Access:**
 - **Username**: `admin`
 - **Password**: `admin123`
+
+**Employee Access:**
+- Employees can self-register via the Employee Signup page
+- After registration, login with created credentials
 
 ## 📚 Documentation
 
@@ -264,11 +280,12 @@ npm run dev
 
 ### 1. Authentication & Security
 - JWT token-based authentication with refresh tokens
-- Role-based authorization (ADMIN, HR)
+- Role-based authorization (ADMIN, HR, EMPLOYEE)
 - Secure password encryption with BCrypt
 - Account lockout after failed attempts
 - Rate limiting for API protection
 - Input sanitization for XSS/SQL injection prevention
+- Separate portals for Admin/HR and Employees
 
 ### 2. Employee Management
 - Add, edit, delete employees with validation
@@ -305,6 +322,21 @@ npm run dev
 - Failed login attempt monitoring
 - Request/response logging
 - Performance metrics tracking
+
+### 7. Employee Portal
+- Self-service registration for employees
+- Dedicated employee dashboard
+- View personal attendance records
+- Access payroll information
+- Receive real-time notifications
+- Update profile information
+
+### 8. Notification System
+- Automated notifications for status changes
+- Payroll generation alerts
+- Attendance confirmation
+- Real-time notification delivery
+- Notification history and management
 
 ## 🔒 Security Features
 
@@ -365,6 +397,13 @@ npm run dev
 - `GET /api/payroll/{id}` - Get payroll by ID
 - `GET /api/payroll/employee/{employeeId}` - Get employee payroll history
 - `GET /api/payroll/download/{id}` - Download payslip PDF
+
+### Notifications
+- `GET /api/notifications` - Get all notifications for current user
+- `GET /api/notifications/unread` - Get unread notifications
+- `GET /api/notifications/unread/count` - Get unread count
+- `PUT /api/notifications/{id}/read` - Mark notification as read
+- `PUT /api/notifications/read-all` - Mark all as read
 
 ### System
 - `GET /api/health` - Health check endpoint
@@ -455,6 +494,18 @@ See [DEPLOYMENT.md](DEPLOYMENT.md#troubleshooting) for common issues and solutio
 - Verify database exists
 - Check firewall rules
 
+**"Data truncated for column 'role'" error:**
+- This occurs when upgrading from 2-role to 3-role system
+- Solution: Drop and recreate users table OR run:
+  ```sql
+  ALTER TABLE users MODIFY COLUMN role VARCHAR(50);
+  ```
+
+**Employee registration fails:**
+- Ensure backend is restarted after code changes
+- Verify ROLE_EMPLOYEE is in User.java enum
+- Check database role column size (VARCHAR(50))
+
 
 
 ## 📈 Performance Metrics
@@ -482,6 +533,14 @@ This project is for educational purposes.
 
 This is a complete production-ready system. Feel free to extend it with additional features:
 
+### Completed Features (Phase 13)
+- ✅ **Employee Portal** - Self-service portal for employees
+- ✅ **Employee Registration** - Self-registration with ROLE_EMPLOYEE
+- ✅ **Employee Dashboard** - Dedicated dashboard with stats
+- ✅ **Notification System** - Real-time notifications for employees
+- ✅ **Status Change Alerts** - Automatic notifications on status updates
+- ✅ **Three-Tier Role System** - ADMIN, HR, EMPLOYEE roles
+
 ### Planned Features
 - 📧 Email notifications and verification
 - 🔑 Password reset functionality
@@ -492,10 +551,11 @@ This is a complete production-ready system. Feel free to extend it with addition
 - 📊 Advanced analytics and reporting
 - 🏖️ Leave management system
 - 📝 Performance reviews
-- 🔔 Real-time notifications
 - 🌍 Internationalization (i18n)
 - ♿ Enhanced accessibility (WCAG 2.1)
 - 📱 Mobile app (React Native)
+- 🔔 WebSocket real-time notifications
+- 📱 Push notifications
 
 ## 🎓 Learning Resources
 

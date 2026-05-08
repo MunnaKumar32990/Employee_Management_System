@@ -18,6 +18,9 @@ import EmployeeForm from './pages/employees/EmployeeForm';
 import DepartmentList from './pages/departments/DepartmentList';
 import AttendanceManagement from './pages/attendance/AttendanceManagement';
 import PayrollManagement from './pages/payroll/PayrollManagement';
+import EmployeeSignup from './pages/EmployeeSignup';
+import EmployeeLogin from './pages/EmployeeLogin';
+import EmployeeDashboard from './pages/EmployeeDashboard';
 
 const theme = createTheme({
     palette: {
@@ -41,6 +44,16 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/setup" element={<Setup />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="/employee/signup" element={<EmployeeSignup />} />
+                            <Route path="/employee/login" element={<EmployeeLogin />} />
+                            <Route
+                                path="/employee/dashboard"
+                                element={
+                                    <ProtectedRoute>
+                                        <EmployeeDashboard />
+                                    </ProtectedRoute>
+                                }
+                            />
                             <Route
                                 path="/app"
                                 element={

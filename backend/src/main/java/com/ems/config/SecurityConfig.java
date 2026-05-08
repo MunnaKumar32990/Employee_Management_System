@@ -49,8 +49,9 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/departments/**").hasAnyRole("ADMIN", "HR")
                         .requestMatchers("/api/employees/**").hasAnyRole("ADMIN", "HR")
-                        .requestMatchers("/api/attendance/**").hasAnyRole("ADMIN", "HR")
-                        .requestMatchers("/api/payroll/**").hasAnyRole("ADMIN", "HR")
+                        .requestMatchers("/api/attendance/**").hasAnyRole("ADMIN", "HR", "EMPLOYEE")
+                        .requestMatchers("/api/payroll/**").hasAnyRole("ADMIN", "HR", "EMPLOYEE")
+                        .requestMatchers("/api/notifications/**").authenticated()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

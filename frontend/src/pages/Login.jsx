@@ -19,7 +19,13 @@ const Login = () => {
         const result = await login(username, password);
 
         if (result.success) {
-            navigate('/app/dashboard');
+            // Check user role and redirect accordingly
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            if (storedUser && storedUser.role === 'ROLE_EMPLOYEE') {
+                navigate('/employee/dashboard');
+            } else {
+                navigate('/app/dashboard');
+            }
         } else {
             setError(result.message);
         }
