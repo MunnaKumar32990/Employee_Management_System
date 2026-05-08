@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import api from '../services/api';
+import { tokenStorage } from '../utils/tokenStorage';
 
 const AuthContext = createContext(null);
 
@@ -9,22 +10,35 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         // Check if user is logged in on mount
-        const token = localStorage.getItem('token');
-        const storedUser = localStorage.getItem('user');
+        const refreshToken = tokenStorage.getRefreshToken();
+        const storedUser = tokenStorage.getUser();
 
-        if (token && storedUser) {
-            setUser(JSON.parse(storedUser));
+        if (refreshToken && storedUser) {
+            setUser(storedUser);
+            // Attempt to refresh access token
+            refreshAccessToken(refreshToken);
         }
         setLoading(false);
     }, []);
 
+    const refreshAccessToken = async (refreshToken) => {
+        try {
+            const response = await api.post('/auth/refresh', { refreshToken });
+            const { accessToken, expiresIn } = response.data.data;
+            tokenStorage.setTokens(accessToken, refreshToken, expiresIn);
+        } catch (error) {
+            console.error('Token refresh failed:', error);
+            logout();
+        }
+    };
+
     const login = async (username, password) => {
         try {
             const response = await api.post('/auth/login', { username, password });
-            const { token, ...userData } = response.data.data;
+            const { accessToken, refreshToken, expiresIn, ...userData } = response.data.data;
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(userData));
+            tokenStorage.setTokens(accessToken, refreshToken, expiresIn);
+            tokenStorage.setUser(userData);
             setUser(userData);
 
             return { success: true };
@@ -36,10 +50,15 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setUser(null);
+    const logout = async () => {
+        try {
+            await api.post('/auth/logout');
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            tokenStorage.clearTokens();
+            setUser(null);
+        }
     };
 
     const value = {
